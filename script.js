@@ -65,7 +65,7 @@ function renderContent(lang) {
                     <div class="card-num">${card.num}</div>
                     <h3>${card.title}</h3>
                     <p>${card.text}</p>
-                    <a href="https://github.com/MRGrass2011" target="_blank" class="git-btn">OPEN REPOSITORY</a>
+                    <a href="https://github.com/MRGrass2011/Artur-portfolio" target="_blank" class="git-btn">OPEN ARCHIVE</a>
                 </div>
             `;
         }
