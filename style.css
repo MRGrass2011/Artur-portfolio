@@ -1,0 +1,293 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Space+Grotesk:wght@400;700&display=swap');
+
+:root {
+    --bg-color: #0b0b0e;
+    --text-color: #ffffff;
+    --accent-pink: #ff007f;
+    --accent-cyan: #00f0ff;
+    --card-bg: #13131a;
+    --border-color: #22222e;
+    --marquee-bg: #1a001a;
+}
+
+body.light-vibe {
+    --bg-color: #f5f5f7;
+    --text-color: #0b0b0e;
+    --accent-pink: #d10066;
+    --accent-cyan: #00b3c2;
+    --card-bg: #ffffff;
+    --border-color: #e0e0e6;
+    --marquee-bg: #eadeea;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Space Grotesk', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    background: var(--text-color);
+    color: var(--bg-color);
+    padding: 6px 12px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--accent-cyan);
+}
+
+.status {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent-cyan);
+    font-weight: bold;
+}
+
+.theme-btn {
+    background: transparent;
+    border: 2px solid var(--text-color);
+    color: var(--text-color);
+    padding: 8px 16px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.theme-btn:hover {
+    background: var(--text-color);
+    color: var(--bg-color);
+}
+
+/* Бегущая строка */
+.marquee-container {
+    background-color: var(--marquee-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 12px 0;
+    overflow: hidden;
+    display: flex;
+}
+
+.marquee-track {
+    display: flex;
+    width: max-content;
+    animation: scrollMarquee 25s linear infinite;
+}
+
+.marquee-track span {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    font-weight: 900;
+    color: var(--accent-pink);
+    letter-spacing: 4px;
+    padding-right: 20px;
+    white-space: nowrap;
+}
+
+@keyframes scrollMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-25%); }
+}
+
+/* Главный экран */
+.hero-section {
+    padding: 60px 40px;
+    max-width: 900px;
+}
+
+.author-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+}
+
+.main-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 68px;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin: 0 0 30px 0;
+}
+
+body.light-vibe .text-white { color: #0b0b0e; }
+body:not(.light-vibe) .text-white { color: #ffffff; }
+
+.text-pink { color: var(--accent-pink); }
+.text-cyan { color: var(--accent-cyan); }
+
+/* ЭФФЕКТ КИБЕРПАНК-ГЛИТЧА */
+.glitch {
+    position: relative;
+}
+
+.trigger-glitch {
+    animation: glitchBlur 0.4s linear;
+}
+
+.trigger-glitch::before,
+.trigger-glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+}
+
+.trigger-glitch::before {
+    left: 4px;
+    text-shadow: -2px 0 var(--accent-cyan);
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitchAnim1 0.4s linear infinite;
+}
+
+.trigger-glitch::after {
+    left: -4px;
+    text-shadow: -2px 0 var(--accent-pink);
+    clip: rect(85px, 450px, 140px, 0);
+    animation: glitchAnim2 0.4s linear infinite;
+}
+
+@keyframes glitchBlur {
+    0% { filter: hue-rotate(0deg) saturate(2); }
+    50% { filter: hue-rotate(180deg) blur(1px); transform: skewX(10deg); }
+    100% { filter: hue-rotate(360deg) saturate(1); }
+}
+
+@keyframes glitchAnim1 {
+    0% { clip: rect(20px, 9999px, 40px, 0); }
+    30% { clip: rect(60px, 9999px, 80px, 0); }
+    70% { clip: rect(10px, 9999px, 50px, 0); }
+    100% { clip: rect(90px, 9999px, 120px, 0); }
+}
+
+@keyframes glitchAnim2 {
+    0% { clip: rect(70px, 9999px, 105px, 0); }
+    40% { clip: rect(15px, 9999px, 45px, 0); }
+    80% { clip: rect(80px, 9999px, 110px, 0); }
+    100% { clip: rect(30px, 9999px, 75px, 0); }
+}
+
+.subtitle {
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: var(--text-color);
+    opacity: 0.6;
+    margin-bottom: 40px;
+}
+
+.bio-text p {
+    font-size: 16px;
+    line-height: 1.6;
+    opacity: 0.85;
+    margin-bottom: 20px;
+}
+
+/* Сетка карточек */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    position: relative;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-cyan);
+}
+
+.card-num {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 16px;
+    color: var(--text-color);
+    opacity: 0.15;
+}
+
+.card h3 {
+    font-family: 'Orbitron', sans-serif;
+    margin-top: 0;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: var(--text-color);
+}
+
+.card p {
+    font-size: 14px;
+    line-height: 1.5;
+    opacity: 0.7;
+}
+
+.github-card {
+    border-left: 3px solid var(--accent-pink);
+}
+
+.git-btn {
+    display: inline-block;
+    margin-top: 15px;
+    background: var(--accent-pink);
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    transition: opacity 0.2s;
+}
+
+.git-btn:hover {
+    opacity: 0.9;
+}
+
+/* --- МАГИЯ ПРОТИВ ДЕФОРМАЦИИ КАРТОЧЕК --- */
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.card p {
+    margin-bottom: 0;
+    word-wrap: break-word;
+}
+
+.grid-container {
+    grid-auto-rows: 1fr;
+}
