@@ -5,6 +5,9 @@ const authorTitle = document.getElementById('author-title');
 const bioContainer = document.getElementById('bio-container');
 const cardsGrid = document.getElementById('cards-grid');
 
+// Достаем наш микшер
+const mixerDropdown = document.getElementById('mixer-dropdown');
+
 // Текущий язык по умолчанию
 let currentLang = 'ru';
 
@@ -48,16 +51,10 @@ const translations = {
 
 // Функция отрисовки текстового контента на сайте
 function renderContent(lang) {
-    // 1. Меняем подзаголовок
     document.querySelector('[data-lang-key="subtitle"]').textContent = translations[lang].subtitle;
-    
-    // 2. Меняем имя автора над заголовком
     authorTitle.textContent = lang === 'ru' ? "Артур Маилянов" : "Artur Mailyanov";
-    
-    // 3. Меняем биографию
     bioContainer.innerHTML = translations[lang].bio.map(paragraph => `<p>${paragraph}</p>`).join('');
     
-    // 4. Генерируем карточки конкурса
     cardsGrid.innerHTML = translations[lang].cards.map(card => {
         if (card.isGit) {
             return `
@@ -79,28 +76,25 @@ function renderContent(lang) {
     }).join('');
 }
 
-// Первичный запуск отрисовки сайта при открытии страницы
 renderContent(currentLang);
 
 // Клик по кнопке языка
 langSwitch.addEventListener('click', () => {
-    // Меняем язык
     currentLang = currentLang === 'ru' ? 'en' : 'ru';
-    
-    // Запускаем красивый глитч во время перевода
     glitchElements.forEach(el => el.classList.add('trigger-glitch'));
-    
-    // Переводим контент
     renderContent(currentLang);
-    
-    // Убираем глитч через 400мс
     setTimeout(() => {
         glitchElements.forEach(el => el.classList.remove('trigger-glitch'));
     }, 400);
 });
 
-// Магия переключения тем (Тёмный/Светлый Вайб)
-toggleBtn.addEventListener('click', () => {
+// Магия переключения тем (Тёмный/Светлый Вайб) + Открытие микшера
+toggleBtn.addEventListener('click', (e) => {
+    // Показываем или скрываем панель микшера
+    if (mixerDropdown) {
+        mixerDropdown.classList.toggle('show');
+    }
+
     glitchElements.forEach(el => el.classList.add('trigger-glitch'));
     document.body.classList.toggle('light-vibe');
     
@@ -113,4 +107,42 @@ toggleBtn.addEventListener('click', () => {
     setTimeout(() => {
         glitchElements.forEach(el => el.classList.remove('trigger-glitch'));
     }, 400);
+});
+
+// --- ЛОГИКА МУЗЫКАЛЬНОГО МИКШЕРА ---
+
+// Закрываем окно микшера, если кликнули в любое другое место сайта
+document.addEventListener('click', (e) => {
+    if (mixerDropdown && !toggleBtn.contains(e.target) && !mixerDropdown.contains(e.target)) {
+        mixerDropdown.classList.remove('show');
+    }
+});
+
+// Функция для управления ползунками
+function setupSlider(sliderId, audioId) {
+    const slider = document.getElementById(sliderId);
+    const audio = document.getElementById(audioId);
+
+    if (slider && audio) {
+        audio.volume = 0; // Изначально звук на нуле
+
+        slider.addEventListener('input', () => {
+            const volumeValue = parseFloat(slider.value);
+            audio.volume = volumeValue;
+
+            if (volumeValue > 0 && audio.paused) {
+                audio.play().catch(err => console.log("Браузер ожидает взаимодействия: ", err));
+            } else if (volumeValue === 0 && !audio.paused) {
+                audio.pause();
+            }
+        });
+    }
+}
+
+// Запускаем плееры при загрузке страницы
+document.addEventListener('DOMContentLoaded', () => {
+    setupSlider('volume-ambient', 'audio-ambient');
+    setupSlider('volume-rain', 'audio-rain');
+    setupSlider('volume-fireplace', 'audio-fireplace');
+    setupSlider('volume-keyboard', 'audio-keyboard');
 });

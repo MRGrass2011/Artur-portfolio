@@ -45,6 +45,32 @@
     <section class="grid-container" id="cards-grid">
         </section>
 
+    <div class="sound-mixer" id="mixer-dropdown">
+        <h3>Атмосфера 🎧</h3>
+        
+        <audio id="audio-ambient" src="Electronic ambient.mp3" loop></audio>
+        <audio id="audio-rain" src="Rain.mp3" loop></audio>
+        <audio id="audio-fireplace" src="Fireplace.mp3" loop></audio>
+        <audio id="audio-keyboard" src="Typing.mp3" loop></audio>
+
+        <div class="mixer-item">
+            <label for="volume-ambient">Эмбиент</label>
+            <input type="range" id="volume-ambient" min="0" max="1" step="0.01" value="0">
+        </div>
+        <div class="mixer-item">
+            <label for="volume-rain">Дождь</label>
+            <input type="range" id="volume-rain" min="0" max="1" step="0.01" value="0">
+        </div>
+        <div class="mixer-item">
+            <label for="volume-fireplace">Камин</label>
+            <input type="range" id="volume-fireplace" min="0" max="1" step="0.01" value="0">
+        </div>
+        <div class="mixer-item">
+            <label for="volume-keyboard">Клавиатура</label>
+            <input type="range" id="volume-keyboard" min="0" max="1" step="0.01" value="0">
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
